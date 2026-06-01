@@ -48,7 +48,7 @@ def process_file(content):
             metadata = {"תעודה": "", "אסמכתא": "", "תאריך": ""}
     if not parsed_rows:
         raise ValueError("לא נמצאו שורות תואמות לעיבוד בקובץ שנבחר.")
-        df = pd.DataFrame(parsed_rows)
+    df = pd.DataFrame(parsed_rows)
     
     # Crucial Step: Parse text date fragments ("DD.MM.YY") into real Timestamp elements
     df['תאריך'] = pd.to_datetime(df['תאריך'], format='%d.%m.%y', errors='coerce')
