@@ -18,8 +18,6 @@ def process_file(content):
     soup = BeautifulSoup(content, 'html.parser')
     for row in soup.find_all('tr'):
         
-    for row in soup.find_all('tr'):
-        
         if 'mso-outline-level:6' in row.get_attribute_list("style"):
             tds = [td.get_text(strip=True) for td in row.find_all('td')]
             item = {
