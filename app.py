@@ -3,6 +3,7 @@ import os
 from bs4 import BeautifulSoup
 import os
 import re
+import io
 import sys
 import logging
 import pandas as pd
