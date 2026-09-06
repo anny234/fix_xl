@@ -10,6 +10,7 @@ import pandas as pd
 import openpyxl
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils.dataframe import dataframe_to_rows
+import gc
 
 def process_file(content):
     st.info("Processing....")
@@ -51,6 +52,10 @@ def process_file(content):
     if not parsed_rows:
         raise ValueError("לא נמצאו שורות תואמות לעיבוד בקובץ שנבחר.")
     df = pd.DataFrame(parsed_rows)
+
+    soup.decompose() 
+    del soup 
+    gc.collect()
     
     # Crucial Step: Parse text date fragments ("DD.MM.YY") into real Timestamp elements
     df['תאריך'] = pd.to_datetime(df['תאריך'], format='%d.%m.%y', errors='coerce')
