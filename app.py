@@ -12,7 +12,7 @@ from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils.dataframe import dataframe_to_rows
 
 def process_file(content):
-    logging.info("Processing....")
+    st.info("Processing....")
     parsed_rows = []
     temp_items = []
     metadata = {"תעודה": "", "אסמכתא": "", "תאריך": ""}
@@ -58,7 +58,7 @@ def process_file(content):
     cols = ['תאריך', 'אסמכתא', 'תעודה', 'פריט', 'תיאור פריט', 'הזמנה', 'כמות', 'תאור י.מידה', 'מחיר ספק', 'ערך ספק']
     df = df[cols]
 
-    logging.info("Finished processing. Now saving file...")
+    st.info("Finished processing. Now saving file...")
 
     wb = openpyxl.Workbook()
     ws = wb.active
