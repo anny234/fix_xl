@@ -69,6 +69,8 @@ def process_file(content):
     
     for r in dataframe_to_rows(df, index=False, header=True):
         ws.append(r)
+
+    st.info("Appended all rows")
         
     header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
     header_font = Font(name="Calibri", size=11, bold=True, color="FFFFFF")
@@ -106,17 +108,26 @@ def process_file(content):
                     cell.number_format = '@' # Enforces clean text representation for reference IDs
                 else:
                     cell.alignment = Alignment(horizontal="right", vertical="center")
-                    
+
+    st.info("Setted rows...")
+    
     for col in ws.columns:
         max_len = max(len(str(cell.value or '')) for cell in col)
         col_letter = openpyxl.utils.get_column_letter(col[0].column)
         ws.column_dimensions[col_letter].width = max(max_len + 4, 12)
+
+    st.info("Setted cols...")
         
     ws.auto_filter.ref = f"A1:{openpyxl.utils.get_column_letter(ws.max_column)}{ws.max_row}"
 
     buffer = io.BytesIO()
+
+    st.info("about to save...")
+    
     wb.save(buffer)
     buffer.seek(0)
+
+    st.info("Returning...")
 
     return buffer.read()  # bytes
 
